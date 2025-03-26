@@ -208,6 +208,95 @@
 
             drawnItems.addLayer(layer);
         });
+
+        /* GeoJSON Point */
+        var points = L.geoJson(null, {
+            onEachFeature: function(feature, layer) {
+                var popupContent = "Name: " + feature.properties.name + "<br>" +
+                    "Deskripsi: " + feature.properties.description + "<br> " +
+                    "Dibuat: " + feature.properties.created_at;
+                layer.on({
+                    click: function(e) {
+                        points.bindPopup(popupContent);
+                    },
+                    mouseover: function(e) {
+                        points.bindTooltip(feature.properties.kab_kota);
+                    },
+                });
+            },
+        });
+        $.getJSON("{{ route('api.points') }}", function(data) {
+            points.addData(data);
+            map.addLayer(points);
+        });
+
+        /* GeoJSON Polyline */
+        var polylines = L.geoJson(null, {
+            style: function(feature) {
+                return {
+                    color: '#13278a',
+                    weight: 3
+                };
+            },
+            onEachFeature: function(feature, layer) {
+                var popupContent = "Name: " + feature.properties.name + "<br>" +
+                    "Deskripsi: " + feature.properties.description + "<br> " +
+                    "Panjang: " + feature.properties.length_km.toFixed(2) + "km<br> " +
+                    "Dibuat: " + feature.properties.created_at;
+                layer.on({
+                    click: function(e) {
+                        polylines.bindPopup(popupContent);
+                    },
+                    mouseover: function(e) {
+                        polylines.bindTooltip(feature.properties.kab_kota);
+                    },
+                });
+            },
+        });
+        $.getJSON("{{ route('api.polylines') }}", function(data) {
+            polylines.addData(data);
+            map.addLayer(polylines);
+        });
+
+        /* GeoJSON Polygon */
+        var polygons = L.geoJson(null, {
+            style: function(feature) {
+                return {
+                    color: '#1530b3',
+                    fillColor: '#bad5e0',
+                    fillOpacity: 0.8,
+                    weight: 2
+                };
+            },
+            onEachFeature: function(feature, layer) {
+                var popupContent = "Nama: " + feature.properties.name + "<br>" +
+                    "Deskripsi: " + feature.properties.description + "<br> " +
+                    "Luas(Km2): " + feature.properties.luas_km2.toFixed(2) + "km<sup>2</sup><br> " +
+                    "Dibuat: " + feature.properties.created_at;
+                layer.on({
+                    click: function(e) {
+                        polygons.bindPopup(popupContent);
+                    },
+                    mouseover: function(e) {
+                        polygons.bindTooltip(feature.properties.kab_kota);
+                    },
+                });
+            },
+        });
+        $.getJSON("{{ route('api.polygons') }}", function(data) {
+            polygons.addData(data);
+            map.addLayer(polygons);
+        });
+
+        // Control Layer
+        var overlayMaps = {
+            "Points": points,
+            "Polylines": polylines,
+            "Polygons": polygons,
+        };
+
+        var controllayer = L.control.layers(overlayMaps);
+        controllayer.addTo(map);
     </script>
 @endsection
 
