@@ -48,10 +48,10 @@
                         <div class="mb-3">
                             <label for="image" class="form-label">Photo</label>
                             <input type="file" class="form_control" id="image_point" name="image"
-                            onchange="document.getElementById('preview-image-point').src = window.URL.
+                                onchange="document.getElementById('preview-image-point').src = window.URL.
                             createObjectURL(this.files[0])">
                             <img src="" alt="" id="preview-image-point" class="img-thumbnail"
-                            width="400">
+                                width="400">
                         </div>
 
                     </div>
@@ -95,10 +95,10 @@
                         <div class="mb-3">
                             <label for="image" class="form-label">Photo</label>
                             <input type="file" class="form_control" id="image_polyline" name="image"
-                            onchange="document.getElementById('preview-image-polyline').src = window.URL.
+                                onchange="document.getElementById('preview-image-polyline').src = window.URL.
                             createObjectURL(this.files[0])">
                             <img src="" alt="" id="preview-image-polyline" class="img-thumbnail"
-                            width="400">
+                                width="400">
                         </div>
 
                     </div>
@@ -143,10 +143,10 @@
                         <div class="mb-3">
                             <label for="image" class="form-label">Photo</label>
                             <input type="file" class="form_control" id="image_polygon" name="image"
-                            onchange="document.getElementById('preview-image-polygon').src = window.URL.
+                                onchange="document.getElementById('preview-image-polygon').src = window.URL.
                             createObjectURL(this.files[0])">
                             <img src="" alt="" id="preview-image-polygon" class="img-thumbnail"
-                            width="400">
+                                width="400">
                         </div>
 
                     </div>
@@ -243,7 +243,12 @@
                 var popupContent = "Name: " + feature.properties.name + "<br>" +
                     "Deskripsi: " + feature.properties.description + "<br> " +
                     "Dibuat: " + feature.properties.created_at + "<br>" +
-                    "<img src='{{ asset('storage/images') }}/" + feature.properties.image + "' width='200' alt=' '>";
+                    "<img src='{{ asset('storage/images') }}/" + feature.properties.image +
+                    "' width='200' alt=' '>" + "<br>" +
+                    "<form method='POST' action='{{ url('points') }}/" + feature.properties.id + "'>" +
+                    '{{ csrf_field() }}' + '@method('DELETE')' +
+                    "<button type='submit' class= 'btn btn-sm btn-danger' onclick='return confirm(`Yakin akan dihapus?`)'><i class='fa-solid fa-trash'></i></button>" +
+                    "</form>";
                 layer.on({
                     click: function(e) {
                         points.bindPopup(popupContent);
@@ -272,7 +277,12 @@
                     "Deskripsi: " + feature.properties.description + "<br> " +
                     "Panjang: " + feature.properties.length_km.toFixed(2) + "km<br> " +
                     "Dibuat: " + feature.properties.created_at + "<br>" +
-                    "<img src='{{ asset('storage/images') }}/" + feature.properties.image + "' width='200' alt=' '>";
+                    "<img src='{{ asset('storage/images') }}/" + feature.properties.image +
+                    "' width='200' alt=' '>" + "<br>" +
+                    "<form method='POST' action='{{ url('polylines') }}/" + feature.properties.id + "'>" +
+                    '{{ csrf_field() }}' + '@method('DELETE')' +
+                    "<button type='submit' class= 'btn btn-sm btn-danger' onclick='return confirm(`Yakin akan dihapus?`)'><i class='fa-solid fa-trash'></i></button>" +
+                    "</form>";
                 layer.on({
                     click: function(e) {
                         polylines.bindPopup(popupContent);
@@ -303,7 +313,12 @@
                     "Deskripsi: " + feature.properties.description + "<br> " +
                     "Luas(Km2): " + feature.properties.luas_km2.toFixed(2) + "km<sup>2</sup><br> " +
                     "Dibuat: " + feature.properties.created_at + "<br>" +
-                    "<img src='{{ asset('storage/images') }}/" + feature.properties.image + "' width='200' alt=' '>";
+                    "<img src='{{ asset('storage/images') }}/" + feature.properties.image +
+                    "' width='200' alt=' '>" + "<br>" +
+                    "<form method='POST' action='{{ url('polygons') }}/" + feature.properties.id + "'>" +
+                    '{{ csrf_field() }}' + '@method('DELETE')' +
+                    "<button type='submit' class= 'btn btn-sm btn-danger' onclick='return confirm(`Yakin akan dihapus?`)'><i class='fa-solid fa-trash'></i></button>" +
+                    "</form>";
                 layer.on({
                     click: function(e) {
                         polygons.bindPopup(popupContent);
