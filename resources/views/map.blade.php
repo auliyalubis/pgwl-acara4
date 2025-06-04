@@ -242,7 +242,7 @@
             onEachFeature: function(feature, layer) {
 
                 var routeEdit = "{{ route('points.edit', ':id') }}";
-                    routeEdit = routeEdit.replace(':id', feature.properties.id);
+                routeEdit = routeEdit.replace(':id', feature.properties.id);
 
                 var popupContent = "Name: " + feature.properties.name + "<br>" +
                     "Deskripsi: " + feature.properties.description + "<br> " +
@@ -250,16 +250,17 @@
                     "<img src='{{ asset('storage/images') }}/" + feature.properties.image +
                     "' width='200' alt=' '>" + "<br>" +
                     "<div class='row mt-4'>" +
-                        "<div class='col-6 text-end'>" +
-                            "<a href='" + routeEdit + "' class='btn btn-warning btn-sm'><i class='fa-solid fa-pen-to-square'></i></a>" +
-                        "</div>" +
-                        "<div class='col-6'>" +
-                            "<form method='POST' action='{{ url('points') }}/" + feature.properties.id + "'>" +
-                            '{{ csrf_field() }}' + '@method('DELETE')' +
-                            "<button type='submit' class= 'btn btn-sm btn-danger' onclick='return confirm(`Yakin akan dihapus?`)'><i class='fa-solid fa-trash'></i></button>" +
-                            "</form>";
+                    "<div class='col-6 text-end'>" +
+                    "<a href='" + routeEdit +
+                    "' class='btn btn-warning btn-sm'><i class='fa-solid fa-pen-to-square'></i></a>" +
                     "</div>" +
-                "</div>";
+                    "<div class='col-6'>" +
+                    "<form method='POST' action='{{ url('points') }}/" + feature.properties.id + "'>" +
+                    '{{ csrf_field() }}' + '@method('DELETE')' +
+                    "<button type='submit' class= 'btn btn-sm btn-danger' onclick='return confirm(`Yakin akan dihapus?`)'><i class='fa-solid fa-trash'></i></button>" +
+                    "</form>"+
+                "</div>" +
+                "</div>" + "<br>" + "<p> Dibuat Oleh: " + feature.properties.user_created + "</p>";
                 layer.on({
                     click: function(e) {
                         points.bindPopup(popupContent);
@@ -286,7 +287,7 @@
             onEachFeature: function(feature, layer) {
 
                 var routeEdit = "{{ route('polylines.edit', ':id') }}";
-                    routeEdit = routeEdit.replace(':id', feature.properties.id);
+                routeEdit = routeEdit.replace(':id', feature.properties.id);
 
                 var popupContent = "Name: " + feature.properties.name + "<br>" +
                     "Deskripsi: " + feature.properties.description + "<br> " +
@@ -295,14 +296,17 @@
                     "<img src='{{ asset('storage/images') }}/" + feature.properties.image +
                     "' width='200' alt=' '>" + "<br>" +
                     "<div class='row mt-4'>" +
-                        "<div class='col-6 text-end'>" +
-                            "<a href='" + routeEdit + "' class='btn btn-warning btn-sm'><i class='fa-solid fa-pen-to-square'></i></a>" +
-                        "</div>" +
-                        "<div class='col-6'>" +
+                    "<div class='col-6 text-end'>" +
+                    "<a href='" + routeEdit +
+                    "' class='btn btn-warning btn-sm'><i class='fa-solid fa-pen-to-square'></i></a>" +
+                    "</div>" +
+                    "<div class='col-6'>" +
                     "<form method='POST' action='{{ url('polylines') }}/" + feature.properties.id + "'>" +
                     '{{ csrf_field() }}' + '@method('DELETE')' +
                     "<button type='submit' class= 'btn btn-sm btn-danger' onclick='return confirm(`Yakin akan dihapus?`)'><i class='fa-solid fa-trash'></i></button>" +
-                    "</form>";
+                    "</form>" +
+                "</div>" +
+                "</div>" + "<br>" + "<p>Dibuat Oleh: " + feature.properties.user_created + "</p>";
                 layer.on({
                     click: function(e) {
                         polylines.bindPopup(popupContent);
@@ -331,7 +335,7 @@
             onEachFeature: function(feature, layer) {
 
                 var routeEdit = "{{ route('polygons.edit', ':id') }}";
-                    routeEdit = routeEdit.replace(':id', feature.properties.id);
+                routeEdit = routeEdit.replace(':id', feature.properties.id);
 
                 var popupContent = "Nama: " + feature.properties.name + "<br>" +
                     "Deskripsi: " + feature.properties.description + "<br> " +
@@ -340,14 +344,17 @@
                     "<img src='{{ asset('storage/images') }}/" + feature.properties.image +
                     "' width='200' alt=' '>" + "<br>" +
                     "<div class='row mt-4'>" +
-                        "<div class='col-6 text-end'>" +
-                            "<a href='" + routeEdit + "' class='btn btn-warning btn-sm'><i class='fa-solid fa-pen-to-square'></i></a>" +
-                        "</div>" +
-                        "<div class='col-6'>" +
+                    "<div class='col-6 text-end'>" +
+                    "<a href='" + routeEdit +
+                    "' class='btn btn-warning btn-sm'><i class='fa-solid fa-pen-to-square'></i></a>" +
+                    "</div>" +
+                    "<div class='col-6'>" +
                     "<form method='POST' action='{{ url('polygons') }}/" + feature.properties.id + "'>" +
                     '{{ csrf_field() }}' + '@method('DELETE')' +
                     "<button type='submit' class= 'btn btn-sm btn-danger' onclick='return confirm(`Yakin akan dihapus?`)'><i class='fa-solid fa-trash'></i></button>" +
-                    "</form>";
+                    "</form>" +
+                "</div>" +
+                "</div>" + "<br>" + "<p>Dibuat Oleh: " + feature.properties.user_created + "</p>";
                 layer.on({
                     click: function(e) {
                         polygons.bindPopup(popupContent);

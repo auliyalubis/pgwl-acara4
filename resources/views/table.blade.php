@@ -13,7 +13,6 @@
             </tr>
         </thead>
         <tbody>
-            //loop points data
             @foreach ($points as $p)
             <tr>
                 <td>{{ $p->id }}</td>
