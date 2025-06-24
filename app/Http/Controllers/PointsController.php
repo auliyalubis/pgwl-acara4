@@ -42,14 +42,18 @@ class PointsController extends Controller
         $request->validate(
             [
                 'name' => 'required|unique:points,name',
+                'category' => 'required',
                 'description' => 'required',
+                'address' => 'required',
                 'geom_point' => 'required',
                 'image' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ],
             [
                 'name.required' => 'Name is required',
                 'name.unique' => 'Name already exist',
+                'category.required' => 'Category is required',
                 'description.required' => 'Description is required',
+                'address.required' => 'Address is required',
                 'geom_point.required' => 'Geometry point is required',
             ]
         );
@@ -71,7 +75,9 @@ class PointsController extends Controller
         $data = [
             'geom' => $request->geom_point,
             'name' => $request->name,
+            'category' => $request->category,
             'description' => $request->description,
+            'address' => $request->address,
             'image' => $name_image,
             'user_id' => auth()->user()->id,
         ];
@@ -115,14 +121,18 @@ class PointsController extends Controller
         $request->validate(
             [
                 'name' => 'required|unique:points,name,' . $id,
+                'category' => 'required',
                 'description' => 'required',
+                'address' => 'required',
                 'geom_point' => 'required',
                 'image' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ],
             [
                 'name.required' => 'Name is required',
                 'name.unique' => 'Name already exist',
+                'category.required' => 'Category is required',
                 'description.required' => 'Description is required',
+                'address.required' => 'Address is required',
                 'geom_point.required' => 'Geometry point is required',
             ]
         );
@@ -154,7 +164,9 @@ class PointsController extends Controller
         $data = [
             'geom' => $request->geom_point,
             'name' => $request->name,
+            'category' => $request->category,
             'description' => $request->description,
+            'address' => $request->address,
             'image' => $name_image,
         ];
 

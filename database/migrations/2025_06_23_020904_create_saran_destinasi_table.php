@@ -9,23 +9,22 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('polylines', function (Blueprint $table) {
+        Schema::create('saran_destinasi', function (Blueprint $table) {
             $table->id();
-            $table->geometry('geom');
-            $table->string('name');
-            $table->text('description');
-            $table->string('image')->nullable();
+            $table->string('nama_tempat');
+            $table->string('lokasi');
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('polylines');
+        Schema::dropIfExists('saran_destinasi');
     }
 };

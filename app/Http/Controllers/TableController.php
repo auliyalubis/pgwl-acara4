@@ -7,22 +7,19 @@ use App\Models\PointsModel;
 use Illuminate\Http\Request;
 use App\Models\PolygonsModel;
 use App\Models\PolylinesModel;
+use App\Models\SaranDestinasi;
 
 class TableController extends Controller
 {
     public function __construct()
     {
         $this->points = new PointsModel();
-        $this->polylines = new PolylinesModel();
-        $this->polygons = new PolygonsModel();
     }
     public function index()
     {
         $data = [
             'title' => 'Table',
-            'points' => $this->points->all(),
-            'polylines' => $this->polylines->all(),
-            'polygons' => $this->polygons->all(),
+            'points' => $this->points->paginate(5),
         ];
         return view ('table', $data);
     }

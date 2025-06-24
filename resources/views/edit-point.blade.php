@@ -36,8 +36,19 @@
                         </div>
 
                         <div class="mb-3">
+                            <label for="category" class="form-label">Category</label>
+                            <input type="text" class="form-control" id="category" name="category"
+                                placeholder="Category">
+                        </div>
+
+                        <div class="mb-3">
                             <label for="description" class="form-label">Description</label>
                             <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Address</label>
+                            <textarea class="form-control" id="address" name="address" rows="3"></textarea>
                         </div>
 
                         <div class="mb-3">
@@ -115,9 +126,9 @@
 
                 //menampilkan data ke dalam modal
                 $('#name').val(properties.name);
-                        $('#description').val(properties.description);
-                        $('#geom_point').val(objectGeometry);
-                        $('#preview-image-point').attr('src', "{{ asset('storage/images') }}/" + properties.image);
+                $('#description').val(properties.description);
+                $('#geom_point').val(objectGeometry);
+                $('#preview-image-point').attr('src', "{{ asset('storage/images') }}/" + properties.image);
 
                 //menampilkan modal edit
                 $('#editpointModal').modal('show');
@@ -137,9 +148,12 @@
                 layer.on({
                     click: function(e) {
                         $('#name').val(properties.name);
+                        $('#category').val(properties.category);
                         $('#description').val(properties.description);
+                        $('#address').val(properties.address);
                         $('#geom_point').val(objectGeometry);
-                        $('#preview-image-point').attr('src', "{{ asset('storage/images') }}/" + properties.image);
+                        $('#preview-image-point').attr('src', "{{ asset('storage/images') }}/" +
+                            properties.image);
 
                         //menampilkan modal edit
                         $('#editpointModal').modal('show');
